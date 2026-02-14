@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(to bottom right,#ffd6e8,#ff6f91);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-family:Poppins;
+  text-align:center;
+  color:white;
+}
+h1{
+  font-family:'Dancing Script';
+  font-size:2.5rem;
+}
+.buttons{
+  margin-top:30px;
+  display:flex;
+  gap:40px;
+}
+#yes{
+  padding:15px 40px;
+  border:none;
+  border-radius:50px;
+  background:#ff003c;
+  color:white;
+  font-size:18px;
+}
+#no{
+  padding:10px 25px;
+  border-radius:30px;
+  border:2px solid #ff003c;
+  background:white;
+  color:#ff003c;
+}
+</style>
+</head>
+<body>
+
+<audio id="music" src="music.mp3" loop></audio>
+
+<h1>Will You Be My Valentine, Kajal? 💖</h1>
+<p>I've been gathering courage to ask you this...</p>
+
+<div class="buttons">
+  <button id="yes" onclick="go()">Yes ❤️</button>
+  <button id="no">No</button>
+</div>
+
+<script>
+const music=document.getElementById("music");
+
+if(localStorage.getItem("playMusic")==="yes"){
+  music.currentTime=localStorage.getItem("musicTime") || 0;
+  music.play();
+}
+
+setInterval(()=>{
+  localStorage.setItem("musicTime", music.currentTime);
+},1000);
+
+const no=document.getElementById("no");
+const msgs=["Nope!","Try again!","You sure?","Not happening!","Think again!"];
+let m=0;
+
+function move(){
+  no.style.position="fixed";
+  no.style.left=Math.random()*80+"vw";
+  no.style.top=Math.random()*80+"vh";
+  no.innerText=msgs[m];
+  m=(m+1)%msgs.length;
+}
+no.addEventListener("mouseover",move);
+no.addEventListener("click",move);
+no.addEventListener("touchstart",move);
+
+function go(){
+  window.location.href="celebration.html";
+}
+</script>
+
+</body>
+</html>

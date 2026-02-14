@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Memories</title>
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  background:black;
+}
+img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:1.5s;
+}
+img.active{opacity:1;}
+button{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:15px 40px;
+  border:none;
+  border-radius:50px;
+  background:#ff003c;
+  color:white;
+  font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<audio id="music" src="music.mp3" loop></audio>
+
+<img src="photo1.jpg" class="active">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+
+<button onclick="next()">One More Thing...</button>
+
+<script>
+const music=document.getElementById("music");
+
+if(localStorage.getItem("playMusic")==="yes"){
+  music.currentTime=localStorage.getItem("musicTime") || 0;
+  music.play();
+}
+
+setInterval(()=>{
+  localStorage.setItem("musicTime", music.currentTime);
+},1000);
+
+let imgs=document.querySelectorAll("img");
+let i=0;
+setInterval(()=>{
+  imgs[i].classList.remove("active");
+  i=(i+1)%imgs.length;
+  imgs[i].classList.add("active");
+},3000);
+
+function next(){
+  window.location.href="proposal.html";
+}
+</script>
+
+</body>
+</html>
