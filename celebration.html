@@ -1,68 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yayyyy!</title>
+
 <style>
 body{
-  margin:0;
-  height:100vh;
-  background:radial-gradient(circle,#ff6f91,#ff003c);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  overflow:hidden;
+margin:0;
+background:black;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+height:100vh;
 }
+
 h1{
-  font-size:3rem;
-  animation:pulse 1s infinite;
+font-size:4em;
+animation:pulse 1s infinite;
 }
+
 @keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-  100%{transform:scale(1);}
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
 }
-.firework{
-  position:absolute;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  animation:explode 1s forwards;
-}
-@keyframes explode{
-  to{
-    transform:translate(var(--x),var(--y));
-    opacity:0;
-  }
+
+canvas{
+position:absolute;
+top:0;
+left:0;
 }
 </style>
 </head>
 <body>
 
-<audio id="music" src="music.mp3" loop></audio>
+<h1>Yayyyy!! 💖</h1>
+<p>I knew you'd say yes, Kajal 😘</p>
 
-<h1>Yayyyy Kajal!! 💖</h1>
-<p>I knew you'd say yes... – Ashu ❤️</p>
+<canvas id="fireworks"></canvas>
 
 <script>
-const music=document.getElementById("music");
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-if(localStorage.getItem("playMusic")==="yes"){
-  music.currentTime=localStorage.getItem("musicTime") || 0;
-  music.play();
+function firework(){
+let x=Math.random()*canvas.width;
+let y=Math.random()*canvas.height/2;
+
+for(let i=0;i<100;i++){
+let angle=Math.random()*2*Math.PI;
+let speed=Math.random()*5;
+let dx=Math.cos(angle)*speed;
+let dy=Math.sin(angle)*speed;
+let life=50;
+
+(function animate(){
+if(life<=0) return;
+ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+ctx.fillRect(x,y,3,3);
+x+=dx;
+y+=dy;
+life--;
+requestAnimationFrame(animate);
+})();
+}
 }
 
-for(let i=0;i<300;i++){
-  let f=document.createElement("div");
-  f.className="firework";
-  f.style.left=window.innerWidth/2+"px";
-  f.style.top=window.innerHeight/2+"px";
-  f.style.background=`hsl(${Math.random()*360},100%,50%)`;
-  f.style.setProperty('--x',(Math.random()*800-400)+'px');
-  f.style.setProperty('--y',(Math.random()*800-400)+'px');
-  document.body.appendChild(f);
-}
+setInterval(firework,1000);
 </script>
 
 </body>

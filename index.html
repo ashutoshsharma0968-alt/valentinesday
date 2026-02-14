@@ -1,54 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ashu ❤️ Kajal</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
 <style>
 body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  background:linear-gradient(to bottom right,#ffd6e8,#ff6f91);
-  font-family:Poppins;
-  text-align:center;
-  color:white;
+margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-family:'Poppins',sans-serif;
+color:white;
+text-align:center;
+background:radial-gradient(circle at bottom,#1a0033,#000 80%);
+overflow:hidden;
 }
+
+/* 🌌 Stars */
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite ease-in-out;
+}
+@keyframes twinkle{
+0%,100%{opacity:.2;}
+50%{opacity:1;}
+}
+
+/* 🌙 Moon */
+.moon{
+position:absolute;
+top:10%;
+right:10%;
+width:100px;
+height:100px;
+background:#fff;
+border-radius:50%;
+box-shadow:0 0 40px white;
+}
+
 h1{
-  font-family:'Dancing Script';
-  font-size:3rem;
+font-family:'Dancing Script',cursive;
+font-size:3em;
 }
+
 button{
-  margin-top:30px;
-  padding:15px 40px;
-  border:none;
-  border-radius:50px;
-  background:#ff003c;
-  color:white;
-  font-size:18px;
-  cursor:pointer;
+margin-top:30px;
+padding:15px 40px;
+border:none;
+border-radius:40px;
+background:linear-gradient(45deg,#ff4d6d,#ff1e56);
+color:white;
+font-size:18px;
+cursor:pointer;
+box-shadow:0 0 20px #ff4d6d;
+transition:.3s;
+}
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 40px #ff1e56;
 }
 </style>
 </head>
 <body>
 
-<audio id="music" src="music.mp3" loop></audio>
+<div class="moon"></div>
 
 <h1>Ashu ❤️ Kajal</h1>
-<p>Every love story is beautiful, but ours is my favourite 💕</p>
-<button onclick="start()">Begin Our Story</button>
+<p>Our little universe of love ✨</p>
+
+<button onclick="location.href='memories.html'">Enter Our Story</button>
+
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
 
 <script>
-const music=document.getElementById("music");
-
-function start(){
-  music.play();
-  localStorage.setItem("musicTime", music.currentTime);
-  localStorage.setItem("playMusic","yes");
-  window.location.href="memories.html";
+for(let i=0;i<200;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.top=Math.random()*100+"vh";
+star.style.left=Math.random()*100+"vw";
+star.style.animationDuration=(1+Math.random()*3)+"s";
+document.body.appendChild(star);
 }
 </script>
 
